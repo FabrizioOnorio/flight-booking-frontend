@@ -4,8 +4,8 @@ import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 
 const BookingForm = () => {
-	const [fromCity, setFromCity] = useState("Oslo");
-	const [toCity, setToCity] = useState("Stockholm");
+	const [fromCity, setFromCity] = useState("");
+	const [toCity, setToCity] = useState("");
 	const [oneWay, setOneWay] = useState(false);
 	const [roundtrip, setRoundTrip] = useState(true);
 	const [fromDate, setFromDate] = useState(new Date());
@@ -31,24 +31,31 @@ const BookingForm = () => {
 
 	const handleSubmit = (event: React.SyntheticEvent) => {
 		event.preventDefault();
-    console.log(tripSearch);
+		console.log(tripSearch);
 	};
 
 	return (
 		<>
 			<form onSubmit={handleSubmit}>
-				<label>From</label>
-				<select onChange={(e) => setFromCity(e.target.value)}>
-					<option value={"Oslo"}>Oslo</option>
-					<option value={"Stockholm"}>Stockholm</option>
-					<option value={"Amsterdam"}>Amsterdam</option>
-				</select>
-				<label>To</label>
-				<select onChange={(e) => setToCity(e.target.value)}>
-					<option value={"Stockholm"}>Stockholm</option>
-					<option value={"Oslo"}>Oslo</option>
-					<option value={"Amsterdam"}>Amsterdam</option>
-				</select>
+				<input
+					type="text"
+					list="cities"
+					placeholder="From where?"
+					required
+					onChange={(e) => setFromCity(e.target.value)}
+				/>
+				<input
+					type="text"
+					list="cities"
+					placeholder="To where?"
+					required
+					onChange={(e) => setToCity(e.target.value)}
+				/>
+				<datalist id="cities">
+					<option value="Oslo" />
+					<option value="Stockholm" />
+					<option value="Amsterdam" />
+				</datalist>
 				<label>One way</label>
 				<input type="checkbox" checked={oneWay} onChange={handleChange} />
 				<label>Round Trip</label>
