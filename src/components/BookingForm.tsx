@@ -43,6 +43,8 @@ const BookingForm = () => {
 					placeholder="From where?"
 					required
 					onChange={(e) => setFromCity(e.target.value)}
+          autoFocus
+					pattern="Oslo|Stockholm|Amsterdam"
 				/>
 				<input
 					type="text"
@@ -50,6 +52,7 @@ const BookingForm = () => {
 					placeholder="To where?"
 					required
 					onChange={(e) => setToCity(e.target.value)}
+					pattern="Oslo|Stockholm|Amsterdam"
 				/>
 				<datalist id="cities">
 					<option value="Oslo" />
