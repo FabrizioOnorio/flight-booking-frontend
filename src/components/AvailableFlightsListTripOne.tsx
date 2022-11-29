@@ -11,7 +11,13 @@ const AvailableFlightsListTripOne = ({
 	return (
 		<>
 			{flightListOne.firstWayTrips.map(flight => {
-    return <OneFlightCard key={flight.arriveAt} flight={flight} />;
+    return (
+			<OneFlightCard
+				key={flight.arriveAt}
+				flight={flight}
+				flightListOne={flightListOne}
+			/>
+		);
   })}
 		</>
 	);

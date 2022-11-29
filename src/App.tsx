@@ -10,10 +10,14 @@ function App() {
 	const [flightListOne, setFlightListOne] = useState<IFlightListResults>({
 		trip1Id: "",
 		firstWayTrips: [],
+		fromCity: "",
+		toCity: "",
 	});
 	const [flightListTwo, setFlightListTwo] = useState<IFlightListResults>({
 		trip1Id: "",
 		firstWayTrips: [],
+		fromCity: "",
+		toCity: "",
 	});
 
 	return (
