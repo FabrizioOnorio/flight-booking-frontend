@@ -1,19 +1,23 @@
-/* eslint-disable @typescript-eslint/no-unused-vars */
 import { useState } from "react";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
+import { useNavigate } from "react-router-dom";
+import SameCityErrorMessage from "./SameCityErrorMessage";
+
+const address =
+	process.env.NODE_ENV === "development" ? "http://localhost:5000" : "";
 
 const BookingForm = () => {
-	const [fromCity, setFromCity] = useState("");
-	const [toCity, setToCity] = useState("");
+	const [fromCity, setFromCity] = useState("Oslo");
+	const [toCity, setToCity] = useState("Stockholm");
 	const [oneWay, setOneWay] = useState(false);
 	const [roundtrip, setRoundTrip] = useState(true);
 	const [fromDate, setFromDate] = useState(new Date());
 	const [toDate, setToDate] = useState(new Date());
 	const [adults, setAdults] = useState("1");
 	const [children, setChildren] = useState("0");
-
-	const [tripSearch] = useState({
+	const [sameCity, setSameCity] = useState(false);
+	const tripSearch = {
 		fromCity,
 		toCity,
 		oneWay,
@@ -22,7 +26,8 @@ const BookingForm = () => {
 		toDate,
 		adults,
 		children,
-	});
+	};
+	const navigate = useNavigate();
 
 	const handleChange = () => {
 		setOneWay(!oneWay);
@@ -31,34 +36,50 @@ const BookingForm = () => {
 
 	const handleSubmit = (event: React.SyntheticEvent) => {
 		event.preventDefault();
-		console.log(tripSearch);
+		if (fromCity === toCity) {
+			setSameCity(true);
+			setTimeout(() => {
+				setSameCity(false);
+			}, 2000);
+		}
+		if (fromCity !== toCity) {
+			fetch(
+				`${address}/api/flights?tripSearch=${[
+					tripSearch.fromCity,
+					tripSearch.toCity,
+					tripSearch.oneWay,
+					tripSearch.roundtrip,
+					tripSearch.fromDate.toLocaleDateString("en-CA"),
+					tripSearch.toDate.toLocaleDateString("en-CA"),
+					tripSearch.adults,
+					tripSearch.children,
+				]}`
+			)
+				.then((response) => response.json())
+				.then((response) => {
+					return response;
+				})
+        .then((response) => console.log(response))
+				.catch((error) => console.log(error.message));
+			navigate("/available-flights");
+		}
 	};
 
 	return (
 		<>
+			<SameCityErrorMessage sameCity={sameCity} />
 			<form onSubmit={handleSubmit}>
-				<input
-					type="text"
-					list="cities"
-					placeholder="From where?"
-					required
-					onChange={(e) => setFromCity(e.target.value)}
-          autoFocus
-					pattern="Oslo|Stockholm|Amsterdam"
-				/>
-				<input
-					type="text"
-					list="cities"
-					placeholder="To where?"
-					required
-					onChange={(e) => setToCity(e.target.value)}
-					pattern="Oslo|Stockholm|Amsterdam"
-				/>
-				<datalist id="cities">
-					<option value="Oslo" />
-					<option value="Stockholm" />
-					<option value="Amsterdam" />
-				</datalist>
+				<select onChange={(e) => setFromCity(e.target.value)}>
+					<option value={"Oslo"}>Oslo</option>
+					<option value={"Stockholm"}>Stockholm</option>
+					<option value={"Amsterdam"}>Amsterdam</option>
+				</select>
+				<label>To</label>
+				<select onChange={(e) => setToCity(e.target.value)}>
+					<option value={"Stockholm"}>Stockholm</option>
+					<option value={"Oslo"}>Oslo</option>
+					<option value={"Amsterdam"}>Amsterdam</option>
+				</select>
 				<label>One way</label>
 				<input type="checkbox" checked={oneWay} onChange={handleChange} />
 				<label>Round Trip</label>
