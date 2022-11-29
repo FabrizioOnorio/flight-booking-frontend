@@ -1,14 +1,23 @@
 import BookingForm from "./BookingForm";
+import { IFlightListResults } from "../interface";
+
 
 interface IBookFlightStartingPageProps {
-	setFlightList: React.Dispatch<React.SetStateAction<never[]>>;
+	setFlightListOne: React.Dispatch<React.SetStateAction<IFlightListResults>>;
+	setFlightListTwo: React.Dispatch<React.SetStateAction<IFlightListResults>>;
 }
 
-const BookFlightStartingPage = ({ setFlightList }: IBookFlightStartingPageProps) => {
+const BookFlightStartingPage = ({
+	setFlightListOne,
+	setFlightListTwo,
+}: IBookFlightStartingPageProps) => {
 	return (
 		<>
 			<h1>Book</h1>
-			<BookingForm />
+			<BookingForm
+				setFlightListOne={setFlightListOne}
+				setFlightListTwo={setFlightListTwo}
+			/>
 		</>
 	);
 };

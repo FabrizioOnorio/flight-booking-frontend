@@ -3,11 +3,20 @@ import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import { useNavigate } from "react-router-dom";
 import SameCityErrorMessage from "./SameCityErrorMessage";
+import { IFlightListResults } from "../interface";
 
 const address =
 	process.env.NODE_ENV === "development" ? "http://localhost:5000" : "";
 
-const BookingForm = () => {
+interface IBookingFormProps {
+	setFlightListOne: React.Dispatch<React.SetStateAction<IFlightListResults>>;
+	setFlightListTwo: React.Dispatch<React.SetStateAction<IFlightListResults>>;
+}
+
+const BookingForm = ({
+	setFlightListOne,
+	setFlightListTwo,
+}: IBookingFormProps) => {
 	const [fromCity, setFromCity] = useState("Oslo");
 	const [toCity, setToCity] = useState("Stockholm");
 	const [oneWay, setOneWay] = useState(false);
@@ -59,7 +68,13 @@ const BookingForm = () => {
 				.then((response) => {
 					return response;
 				})
-        .then((response) => console.log(response))
+				.then((response) => {
+					if (response.length === 1) setFlightListOne(response[0]);
+					if (response.length === 2) {
+						setFlightListOne(response[0]);
+						setFlightListTwo(response[1]);
+					}
+				})
 				.catch((error) => console.log(error.message));
 			navigate("/available-flights");
 		}

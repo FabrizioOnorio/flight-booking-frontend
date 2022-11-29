@@ -4,9 +4,17 @@ import "./App.css";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import BookFlightStartingPage from "./components/BookFlightStartingPage";
 import AvailableFlightsPage from "./components/AvailableFlightsPage";
+import { IFlightListResults } from "./interface";
 
 function App() {
-	const [flightList, setFlightList] = useState([]);
+	const [flightListOne, setFlightListOne] = useState<IFlightListResults>({
+		trip1Id: "",
+		firstWayTrips: [],
+	});
+	const [flightListTwo, setFlightListTwo] = useState<IFlightListResults>({
+		trip1Id: "",
+		firstWayTrips: [],
+	});
 
 	return (
 		<>
@@ -15,9 +23,17 @@ function App() {
 					<Route path="/" element={<HomePage />} />
 					<Route
 						path="/book-flight-start"
-						element={<BookFlightStartingPage setFlightList={setFlightList} />}
+						element={
+							<BookFlightStartingPage
+								setFlightListOne={setFlightListOne}
+								setFlightListTwo={setFlightListTwo}
+							/>
+						}
 					/>
-					<Route path="/available-flights" element={<AvailableFlightsPage />} />
+					<Route
+						path="/available-flights"
+						element={<AvailableFlightsPage flightListOne={flightListOne} />}
+					/>
 				</Routes>
 			</BrowserRouter>
 		</>

@@ -1,10 +1,17 @@
-import AvailableFlightsList from "./AvailableFlightsList";
+import AvailableFlightsListTripOne from "./AvailableFlightsListTripOne";
+import { IFlightListResults } from "../interface";
 
-const AvailableFlightsPage = () => {
+
+interface IAvailableFlightsPageProps {
+	flightListOne: IFlightListResults;
+}
+const AvailableFlightsPage = ({
+	flightListOne,
+}: IAvailableFlightsPageProps) => {
 	return (
 		<>
 			<h1>Here are the flights we found:</h1>
-			<AvailableFlightsList />
+			<AvailableFlightsListTripOne flightListOne={flightListOne} />
 		</>
 	);
 };
