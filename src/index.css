@@ -1,3 +1,6 @@
+@import './styles/cards.css';
+@import './styles/flightsList.css';
+
 body {
   margin: 0;
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',

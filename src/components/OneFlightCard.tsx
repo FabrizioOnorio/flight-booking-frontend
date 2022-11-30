@@ -1,13 +1,36 @@
-import { useState } from "react";
-import { IFlightListResults, IOneFlight } from "../interface";
+import React, { useState } from "react";
+import {
+	IbookingInfos,
+	IFlightListResults,
+	IOneFlight,
+	ITripSearch,
+} from "../interface";
 
 interface IOneFlightcard {
 	flight: IOneFlight;
-	flightListOne: IFlightListResults;
+	flightListOne?: IFlightListResults;
+	flightListTwo?: IFlightListResults;
+	oneFlightBooked: boolean;
+	setOneFlightBooked: React.Dispatch<React.SetStateAction<boolean>>;
+	setBookedFlights: React.Dispatch<React.SetStateAction<IbookingInfos[]>>;
+	tripSearch: ITripSearch | undefined;
+	bookedFlights: IbookingInfos[];
+	setFlightOneBooked: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
-const OneFlightCard = ({ flight, flightListOne }: IOneFlightcard) => {
-  const [clicked, setClicked] = useState(false)
+const OneFlightCard = ({
+	flight,
+	flightListOne,
+	flightListTwo,
+	setOneFlightBooked,
+	oneFlightBooked,
+	setBookedFlights,
+	tripSearch,
+	bookedFlights,
+	setFlightOneBooked,
+}: IOneFlightcard) => {
+	const [clicked, setClicked] = useState(false);
+	const [booked, setBooked] = useState(false);
 	const departureTime = `${flight.depatureAt.split("T")[1].split(":")[0]}.${
 		flight.depatureAt.split("T")[1].split(":")[1]
 	}`;
@@ -15,6 +38,9 @@ const OneFlightCard = ({ flight, flightListOne }: IOneFlightcard) => {
 		flight.arriveAt.split("T")[1].split(":")[1]
 	}`;
 
+	const flightDate = `${flight.depatureAt.split("T")[0].split("-")[2]}/${
+		flight.depatureAt.split("T")[0].split("-")[1]
+	}`;
 	const diff = (start: string, end: string) => {
 		const startTime = start.split(".");
 		const endTime = end.split(".");
@@ -50,22 +76,63 @@ const OneFlightCard = ({ flight, flightListOne }: IOneFlightcard) => {
 
 	const duration = diff(departureTime, arrivalTime);
 
-  const handleClick = () => setClicked(!clicked);
+	const handleClick = () => setClicked(!clicked);
+
+	const handleBookingButton = (e: React.SyntheticEvent) => {
+		e.stopPropagation();
+		setBooked(true);
+		setOneFlightBooked(true);
+		const bookingInfos = {
+			flight,
+			departureCity:
+				flightListOne !== undefined
+					? flightListOne.fromCity
+					: flightListTwo?.fromCity,
+			arrivalCity:
+				flightListOne !== undefined
+					? flightListOne.toCity
+					: flightListTwo?.toCity,
+			duration,
+			price:
+				Number(flight.prices[0].adult) * Number(tripSearch?.adults) +
+				Number(flight.prices[0].child) * Number(tripSearch?.children),
+		};
+		setBookedFlights((prev) => [...prev, bookingInfos]);
+		setFlightOneBooked(true);
+	};
 
 	return (
 		<div onClick={handleClick}>
+			<p>Flight Date: {flightDate}</p>
 			<p>
-				From {" " + flightListOne.fromCity}, departure time:{" "}
-				{" " + departureTime}
+				From 
+				{" " + flightListOne !== undefined
+					? flightListOne?.fromCity
+					: flightListTwo?.fromCity}
+				, departure time: {" " + departureTime}
 			</p>
 			<p>
-				To {" " + flightListOne.toCity}, arrival time: {" " + arrivalTime}
+				To 
+				{" " + flightListOne !== undefined
+					? flightListOne?.toCity
+					: flightListTwo?.toCity}
+				, arrival time: {" " + arrivalTime}
 			</p>
 			<p>Duration: {" " + duration}</p>
 			<p>
 				Price for this flight:{" "}
-				{flight.prices[0].adult + " " + flight.prices[0].currency}
+				{flight.prices[0].adult + " " + flight.prices[0].currency + " "} per
+				person
 			</p>
+			<div className={clicked ? "cardExtentionVisible" : "cardExtentionHidden"}>
+				<p>
+					Price for Children: {" " + flight.prices[0].child + " "} per person
+				</p>
+				<p>Availbale Seats: {" " + flight.avaliableSeats}</p>
+				<button onClick={handleBookingButton}>
+					{booked ? "Flight Booked" : "Book This Flight"}
+				</button>
+			</div>
 		</div>
 	);
 };

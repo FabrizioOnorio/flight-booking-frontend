@@ -3,7 +3,7 @@ import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import { useNavigate } from "react-router-dom";
 import SameCityErrorMessage from "./SameCityErrorMessage";
-import { IFlightListResults } from "../interface";
+import { IFlightListResults, ITripSearch } from "../interface";
 
 const address =
 	process.env.NODE_ENV === "development" ? "http://localhost:5000" : "";
@@ -11,11 +11,15 @@ const address =
 interface IBookingFormProps {
 	setFlightListOne: React.Dispatch<React.SetStateAction<IFlightListResults>>;
 	setFlightListTwo: React.Dispatch<React.SetStateAction<IFlightListResults>>;
+	setTripSearch: React.Dispatch<React.SetStateAction<ITripSearch | undefined>>;
+	tripSearch: ITripSearch | undefined;
 }
 
 const BookingForm = ({
 	setFlightListOne,
 	setFlightListTwo,
+	setTripSearch,
+	tripSearch,
 }: IBookingFormProps) => {
 	const [fromCity, setFromCity] = useState("Oslo");
 	const [toCity, setToCity] = useState("Stockholm");
@@ -26,16 +30,6 @@ const BookingForm = ({
 	const [adults, setAdults] = useState("1");
 	const [children, setChildren] = useState("0");
 	const [sameCity, setSameCity] = useState(false);
-	const tripSearch = {
-		fromCity,
-		toCity,
-		oneWay,
-		roundtrip,
-		fromDate,
-		toDate,
-		adults,
-		children,
-	};
 	const navigate = useNavigate();
 
 	const handleChange = () => {
@@ -44,6 +38,16 @@ const BookingForm = ({
 	};
 
 	const handleSubmit = (event: React.SyntheticEvent) => {
+		setTripSearch({
+			fromCity,
+			toCity,
+			oneWay,
+			roundtrip,
+			fromDate,
+			toDate,
+			adults,
+			children,
+		});
 		event.preventDefault();
 		if (fromCity === toCity) {
 			setSameCity(true);
@@ -51,7 +55,7 @@ const BookingForm = ({
 				setSameCity(false);
 			}, 2000);
 		}
-		if (fromCity !== toCity) {
+		if (fromCity !== toCity && tripSearch !== undefined) {
 			fetch(
 				`${address}/api/flights?tripSearch=${[
 					tripSearch.fromCity,
