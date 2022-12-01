@@ -1,6 +1,5 @@
 import React, { useState } from "react";
-import { useNavigate
- } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import {
 	IbookingInfos,
 	IFlightListResults,
@@ -29,7 +28,7 @@ const OneFlightCard = ({
 	tripSearch,
 	bookedFlights,
 }: IOneFlightcard) => {
-  const navigate = useNavigate();
+	const navigate = useNavigate();
 	const [clicked, setClicked] = useState(false);
 	const [booked, setBooked] = useState(false);
 	const departureTime = `${flight.depatureAt.split("T")[1].split(":")[0]}.${
@@ -98,10 +97,13 @@ const OneFlightCard = ({
 				Number(flight.prices[0].adult) * Number(tripSearch?.adults) +
 				Number(flight.prices[0].child) * Number(tripSearch?.children),
 			departureTime,
-      arrivalTime
+			arrivalTime,
+			completeDate: flight.depatureAt,
+			adultsBooked: Number(tripSearch?.adults),
+			childrenBooked: Number(tripSearch?.children),
 		};
 		setBookedFlights((prev) => [...prev, bookingInfos]);
-    navigate(`/confirmation1/${departureTime + "-" + flightListOne?.trip1Id}`);
+		navigate(`/confirmation1/${departureTime + "-" + flightListOne?.trip1Id}`);
 	};
 
 	return (

@@ -16,7 +16,6 @@ const AvailableFlightsPage = ({
 	setBookedFlights,
 	bookedFlights,
 	tripSearch,
-	flightListTwo,
 	loading,
 }: IAvailableFlightsPageProps) => {
 	if (loading) return <LoadingPage />;

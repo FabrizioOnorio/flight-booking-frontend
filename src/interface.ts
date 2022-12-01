@@ -27,6 +27,9 @@ export interface IbookingInfos {
 	price: number;
 	departureTime: string;
 	arrivalTime: string;
+	completeDate: string;
+  adultsBooked: number;
+  childrenBooked: number;
 }
 
 export interface ITripSearch {

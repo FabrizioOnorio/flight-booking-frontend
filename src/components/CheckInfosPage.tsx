@@ -1,5 +1,9 @@
 import { useState } from "react";
 import { IbookingInfos, IPassenger } from "../interface";
+import Passenger from "./Passenger";
+
+const address =
+	process.env.NODE_ENV === "development" ? "http://localhost:5000" : "";
 
 interface ICheckInfosPageProps {
 	bookedFlights: IbookingInfos[];
@@ -13,6 +17,17 @@ const CheckInfosPage = ({
 	const [booked, setBooked] = useState(false);
 	const handleClick = () => {
 		setBooked(true);
+		const requestOptions = {
+			method: "PUT",
+			headers: { "Content-Type": "application/json" },
+			body: JSON.stringify({ bookedFlights, passengersList }),
+		};
+		fetch(`${address}/api/flights`, requestOptions)
+			.then((response) => response.json())
+			.then((response) => {
+				return response;
+			})
+			.catch((error) => console.log(error.message));
 	};
 	return (
 		<>
@@ -22,6 +37,7 @@ const CheckInfosPage = ({
 			<h2>Here are your booking details: </h2>
 			<p>Your booked Flights:</p>
 			<p>
+				Date: {bookedFlights[0].completeDate}
 				From{" "}
 				{" " +
 					bookedFlights[0].departureCity +
@@ -36,6 +52,7 @@ const CheckInfosPage = ({
 				Price: {bookedFlights[0].price}
 			</p>
 			<p>
+				Date: {bookedFlights[1].completeDate}
 				From{" "}
 				{" " +
 					bookedFlights[1].departureCity +
@@ -59,16 +76,10 @@ const CheckInfosPage = ({
 			<div>
 				{passengersList.map((passenger) => {
 					return (
-						<p key={passenger.firstName + passenger.lasttName}>
-							{passenger.firstName +
-								" " +
-								passenger.lasttName +
-								" " +
-								passenger.email !==
-							undefined
-								? passenger.email
-								: ""}
-						</p>
+						<Passenger
+							passenger={passenger}
+							key={passenger.firstName + passenger.lasttName}
+						/>
 					);
 				})}
 			</div>
