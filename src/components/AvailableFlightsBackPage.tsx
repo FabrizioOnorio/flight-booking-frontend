@@ -1,27 +1,26 @@
-import AvailableFlightsListTripOne from "./AvailableFlightsListTripOne";
 import { IbookingInfos, IFlightListResults, ITripSearch } from "../interface";
+import AvailableFlightsListTripTwo from "./AvailableFlightsListTripTwo";
 import BookingsBar from "./BookingsBar";
 
-interface IAvailableFlightsPageProps {
-	flightListOne: IFlightListResults;
+interface IAvailableFlightsBackPageProps {
 	setBookedFlights: React.Dispatch<React.SetStateAction<IbookingInfos[]>>;
 	bookedFlights: IbookingInfos[];
 	tripSearch: ITripSearch | undefined;
 	flightListTwo: IFlightListResults;
 }
-const AvailableFlightsPage = ({
-	flightListOne,
+
+const AvailableFlightsBackPage = ({
+	flightListTwo,
 	setBookedFlights,
 	bookedFlights,
 	tripSearch,
-	flightListTwo,
-}: IAvailableFlightsPageProps) => {
+}: IAvailableFlightsBackPageProps) => {
 	return (
 		<>
 			<BookingsBar bookedFlights={bookedFlights} />
 			<div>
-				<AvailableFlightsListTripOne
-					flightListOne={flightListOne}
+				<AvailableFlightsListTripTwo
+					flightListTwo={flightListTwo}
 					setBookedFlights={setBookedFlights}
 					tripSearch={tripSearch}
 					bookedFlights={bookedFlights}
@@ -31,4 +30,4 @@ const AvailableFlightsPage = ({
 	);
 };
 
-export default AvailableFlightsPage;
+export default AvailableFlightsBackPage;

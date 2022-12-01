@@ -6,7 +6,6 @@ interface IAvailableFlightsListTripTwoProps {
 	setBookedFlights: React.Dispatch<React.SetStateAction<IbookingInfos[]>>;
 	tripSearch: ITripSearch | undefined;
 	bookedFlights: IbookingInfos[];
-	setFlightOneBooked: React.Dispatch<React.SetStateAction<boolean>>;
 	flightListTwo: IFlightListResults;
 }
 
@@ -15,7 +14,6 @@ const AvailableFlightsListTripTwo = ({
 	setBookedFlights,
 	tripSearch,
 	bookedFlights,
-	setFlightOneBooked,
 }: IAvailableFlightsListTripTwoProps) => {
 	const [oneFlightBooked, setOneFlightBooked] = useState(false);
   if (flightListTwo.secondWayTrips?.length === 0) return <p>no flights found for the { ' ' + tripSearch?.toDate}, sorry</p>;
@@ -32,7 +30,6 @@ const AvailableFlightsListTripTwo = ({
 							setBookedFlights={setBookedFlights}
 							tripSearch={tripSearch}
 							bookedFlights={bookedFlights}
-							setFlightOneBooked={setFlightOneBooked}
 						/>
 					);
 				})}

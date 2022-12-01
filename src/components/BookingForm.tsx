@@ -38,6 +38,7 @@ const BookingForm = ({
 	};
 
 	const handleSubmit = (event: React.SyntheticEvent) => {
+    event.preventDefault();
 		setTripSearch({
 			fromCity,
 			toCity,
@@ -48,7 +49,6 @@ const BookingForm = ({
 			adults,
 			children,
 		});
-		event.preventDefault();
 		if (fromCity === toCity) {
 			setSameCity(true);
 			setTimeout(() => {

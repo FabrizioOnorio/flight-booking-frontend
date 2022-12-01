@@ -3,7 +3,16 @@ import HomePage from "./components/HomPage";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import BookFlightStartingPage from "./components/BookFlightStartingPage";
 import AvailableFlightsPage from "./components/AvailableFlightsPage";
-import { IbookingInfos, IFlightListResults, ITripSearch } from "./interface";
+import {
+	IbookingInfos,
+	IFlightListResults,
+	IPassenger,
+	ITripSearch,
+} from "./interface";
+import ConfirmationFirstFlightPage from "./components/ConfirmationFirstFlightPage";
+import AvailableFlightsBackPage from "./components/AvailableFlightsBackPage";
+import RegistrationPage from "./components/RegistrationPage";
+import CheckInfosPage from "./components/CheckInfosPage";
 
 function App() {
 	const [flightListOne, setFlightListOne] = useState<IFlightListResults>({
@@ -18,9 +27,9 @@ function App() {
 		fromCity: "",
 		toCity: "",
 	});
-  const [bookedFlights, setBookedFlights] = useState<IbookingInfos[]>([]);
+	const [bookedFlights, setBookedFlights] = useState<IbookingInfos[]>([]);
 	const [tripSearch, setTripSearch] = useState<ITripSearch>();
-
+	const [passengersList, setPassengersList] = useState<IPassenger[]>([]);
 
 	return (
 		<>
@@ -47,6 +56,46 @@ function App() {
 								bookedFlights={bookedFlights}
 								tripSearch={tripSearch}
 								flightListTwo={flightListTwo}
+							/>
+						}
+					/>
+					<Route
+						path="/confirmation1/:id"
+						element={
+							<ConfirmationFirstFlightPage
+								flightListOne={flightListOne}
+								bookedFlights={bookedFlights}
+								tripSearch={tripSearch}
+							/>
+						}
+					/>
+					<Route
+						path="/available-flights-back"
+						element={
+							<AvailableFlightsBackPage
+								flightListTwo={flightListTwo}
+								setBookedFlights={setBookedFlights}
+								bookedFlights={bookedFlights}
+								tripSearch={tripSearch}
+							/>
+						}
+					/>
+					<Route
+						path="/registration"
+						element={
+							<RegistrationPage
+								setPassengersList={setPassengersList}
+								tripSearch={tripSearch}
+								passengersList={passengersList}
+							/>
+						}
+					/>
+					<Route
+						path="/checkInfos"
+						element={
+							<CheckInfosPage
+								bookedFlights={bookedFlights}
+								passengersList={passengersList}
 							/>
 						}
 					/>

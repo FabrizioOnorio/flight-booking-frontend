@@ -7,7 +7,6 @@ interface IAvailableFlightsListTripOneProps {
 	setBookedFlights: React.Dispatch<React.SetStateAction<IbookingInfos[]>>;
 	tripSearch: ITripSearch | undefined;
 	bookedFlights: IbookingInfos[];
-	setFlightOneBooked: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
 const AvailableFlightsListTripOne = ({
@@ -15,7 +14,6 @@ const AvailableFlightsListTripOne = ({
 	setBookedFlights,
 	tripSearch,
 	bookedFlights,
-	setFlightOneBooked,
 }: IAvailableFlightsListTripOneProps) => {
 	const [oneFlightBooked, setOneFlightBooked] = useState(false);
 	return (
@@ -31,7 +29,6 @@ const AvailableFlightsListTripOne = ({
 						setBookedFlights={setBookedFlights}
 						tripSearch={tripSearch}
 						bookedFlights={bookedFlights}
-						setFlightOneBooked={setFlightOneBooked}
 					/>
 				);
 			})}

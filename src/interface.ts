@@ -4,13 +4,6 @@ export interface Iprices {
 	child: number;
 }
 
-export interface IOneFlight {
-	depatureAt: string;
-	arriveAt: string;
-	avaliableSeats: number;
-	prices: Iprices[];
-}
-
 export interface IFlightListResults {
 	trip1Id: string;
 	firstWayTrips: IOneFlight[];
@@ -19,12 +12,21 @@ export interface IFlightListResults {
 	toCity: string;
 }
 
+export interface IOneFlight {
+	depatureAt: string;
+	arriveAt: string;
+	avaliableSeats: number;
+	prices: Iprices[];
+}
+
 export interface IbookingInfos {
 	flight: IOneFlight;
 	departureCity: string | undefined;
 	arrivalCity: string | undefined;
 	duration: string;
-  price: number;
+	price: number;
+	departureTime: string;
+	arrivalTime: string;
 }
 
 export interface ITripSearch {
@@ -36,4 +38,10 @@ export interface ITripSearch {
 	toDate: Date;
 	adults: string;
 	children: string;
+}
+
+export interface IPassenger {
+	firstName: string;
+	lasttName: string;
+	email?: string;
 }

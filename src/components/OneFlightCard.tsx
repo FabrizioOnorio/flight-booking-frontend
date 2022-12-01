@@ -1,4 +1,6 @@
 import React, { useState } from "react";
+import { useNavigate
+ } from "react-router-dom";
 import {
 	IbookingInfos,
 	IFlightListResults,
@@ -15,7 +17,6 @@ interface IOneFlightcard {
 	setBookedFlights: React.Dispatch<React.SetStateAction<IbookingInfos[]>>;
 	tripSearch: ITripSearch | undefined;
 	bookedFlights: IbookingInfos[];
-	setFlightOneBooked: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
 const OneFlightCard = ({
@@ -27,8 +28,8 @@ const OneFlightCard = ({
 	setBookedFlights,
 	tripSearch,
 	bookedFlights,
-	setFlightOneBooked,
 }: IOneFlightcard) => {
+  const navigate = useNavigate();
 	const [clicked, setClicked] = useState(false);
 	const [booked, setBooked] = useState(false);
 	const departureTime = `${flight.depatureAt.split("T")[1].split(":")[0]}.${
@@ -96,9 +97,11 @@ const OneFlightCard = ({
 			price:
 				Number(flight.prices[0].adult) * Number(tripSearch?.adults) +
 				Number(flight.prices[0].child) * Number(tripSearch?.children),
+			departureTime,
+      arrivalTime
 		};
 		setBookedFlights((prev) => [...prev, bookingInfos]);
-		setFlightOneBooked(true);
+    navigate(`/confirmation1/${departureTime + "-" + flightListOne?.trip1Id}`);
 	};
 
 	return (

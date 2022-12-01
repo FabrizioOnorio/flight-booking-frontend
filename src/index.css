@@ -1,5 +1,6 @@
 @import './styles/cards.css';
 @import './styles/flightsList.css';
+@import './styles/checkInfosPage.css';
 
 body {
   margin: 0;

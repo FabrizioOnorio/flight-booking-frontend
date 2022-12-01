@@ -1,0 +1,7 @@
+.confirmationVisible {
+  display: block;
+}
+
+.confirmationHidden {
+  display: hidden;
+}
