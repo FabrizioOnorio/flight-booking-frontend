@@ -13,6 +13,7 @@ interface IBookingFormProps {
 	setFlightListTwo: React.Dispatch<React.SetStateAction<IFlightListResults>>;
 	setTripSearch: React.Dispatch<React.SetStateAction<ITripSearch | undefined>>;
 	tripSearch: ITripSearch | undefined;
+	setLoading: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
 const BookingForm = ({
@@ -20,6 +21,7 @@ const BookingForm = ({
 	setFlightListTwo,
 	setTripSearch,
 	tripSearch,
+	setLoading,
 }: IBookingFormProps) => {
 	const [fromCity, setFromCity] = useState("Oslo");
 	const [toCity, setToCity] = useState("Stockholm");
@@ -38,7 +40,8 @@ const BookingForm = ({
 	};
 
 	const handleSubmit = (event: React.SyntheticEvent) => {
-    event.preventDefault();
+		event.preventDefault();
+		setLoading(true);
 		setTripSearch({
 			fromCity,
 			toCity,
@@ -73,13 +76,18 @@ const BookingForm = ({
 					return response;
 				})
 				.then((response) => {
-					if (response.length === 1) setFlightListOne(response[0]);
+					if (response.length === 1) {
+						setLoading(false);
+						setFlightListOne(response[0]);
+					}
 					if (response.length === 2) {
+						setLoading(false);
 						setFlightListOne(response[0]);
 						setFlightListTwo(response[1]);
 					}
 				})
 				.catch((error) => console.log(error.message));
+
 			navigate("/available-flights");
 		}
 	};

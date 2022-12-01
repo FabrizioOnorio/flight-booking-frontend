@@ -30,6 +30,7 @@ function App() {
 	const [bookedFlights, setBookedFlights] = useState<IbookingInfos[]>([]);
 	const [tripSearch, setTripSearch] = useState<ITripSearch>();
 	const [passengersList, setPassengersList] = useState<IPassenger[]>([]);
+	const [loading, setLoading] = useState(false);
 
 	return (
 		<>
@@ -44,6 +45,7 @@ function App() {
 								setFlightListTwo={setFlightListTwo}
 								setTripSearch={setTripSearch}
 								tripSearch={tripSearch}
+								setLoading={setLoading}
 							/>
 						}
 					/>
@@ -51,6 +53,7 @@ function App() {
 						path="/available-flights"
 						element={
 							<AvailableFlightsPage
+								loading={loading}
 								flightListOne={flightListOne}
 								setBookedFlights={setBookedFlights}
 								bookedFlights={bookedFlights}

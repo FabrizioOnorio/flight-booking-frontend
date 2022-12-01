@@ -27,7 +27,7 @@ const RegistrationPage = ({
   const numberOfExtraPassengers =
 		Array(Number(tripSearch?.adults) + Number(tripSearch?.children) - 1).fill('passenger');
   const handleChekoutButton = () => {
-    if (numberOfExtraPassengers.length === passengersList.length) {
+    if (numberOfExtraPassengers.length + 1 === passengersList.length) {
       navigate('/checkInfos')
     }
   }
@@ -67,7 +67,7 @@ const RegistrationPage = ({
 			</div>
 			<button
 				onClick={handleChekoutButton}
-				disabled={numberOfExtraPassengers.length !== passengersList.length}
+				disabled={numberOfExtraPassengers.length + 1 !== passengersList.length}
 			>
 				Next
 			</button>

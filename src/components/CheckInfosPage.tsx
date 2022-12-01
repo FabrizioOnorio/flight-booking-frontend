@@ -16,7 +16,7 @@ const CheckInfosPage = ({
 	};
 	return (
 		<>
-			<div className={booked ? 'confirmationVisible' : 'confirmationHidden'}>
+			<div className={booked ? "confirmationVisible" : "confirmationHidden"}>
 				<p>Your booking is confirmes, thank you for booking with us!</p>
 			</div>
 			<h2>Here are your booking details: </h2>
@@ -52,19 +52,22 @@ const CheckInfosPage = ({
 			<p>
 				Total Price{" "}
 				{" " +
-					bookedFlights[0]?.price +
-					(bookedFlights[1] ? bookedFlights[1]?.price : 0)}
+					Number(bookedFlights[0]?.price) +
+					(bookedFlights[1] ? Number(bookedFlights[1]?.price) : 0)}
 			</p>
 			<p>Passengers Details:</p>
 			<div>
 				{passengersList.map((passenger) => {
 					return (
-						<p>
+						<p key={passenger.firstName + passenger.lasttName}>
 							{passenger.firstName +
 								" " +
 								passenger.lasttName +
 								" " +
-								passenger.email}
+								passenger.email !==
+							undefined
+								? passenger.email
+								: ""}
 						</p>
 					);
 				})}
