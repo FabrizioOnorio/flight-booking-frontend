@@ -19,7 +19,7 @@ const AvailableFlightsListTripOne = ({
 	if (bookedFlights.length > 0)
 		return <a href="/available-flights-back">next</a>;
 	return (
-		<>
+		<section className="listPageSection">
 			<div
 				style={{
 					display: flightListOne.firstWayTrips.length === 0 ? "block" : "none",
@@ -30,7 +30,13 @@ const AvailableFlightsListTripOne = ({
 				</p>
 				<a href="/book-flight-start">Back to search</a>
 			</div>
-			<section>
+			<div
+				className="titleListpage"
+				style={{ display: flightListOne.firstWayTrips.length === 0 ? 'none' : 'block'}}
+			>
+				<p>Book one of these flights:</p>
+			</div>
+			<section className="cardsList">
 				{flightListOne.firstWayTrips.map((flight) => {
 					return (
 						<OneFlightCard
@@ -46,7 +52,7 @@ const AvailableFlightsListTripOne = ({
 					);
 				})}
 			</section>
-		</>
+		</section>
 	);
 };
 

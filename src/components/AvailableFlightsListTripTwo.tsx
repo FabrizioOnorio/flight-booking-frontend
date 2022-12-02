@@ -19,10 +19,10 @@ const AvailableFlightsListTripTwo = ({
 	if (flightListTwo.secondWayTrips?.length === 0)
 		return <p>no flights found for the {" " + tripSearch?.toDate}, sorry</p>;
 	return (
-		<>
+		<section className="listPageSection">
 			<div
 				style={{
-					display: flightListTwo.firstWayTrips.length === 0 ? "block" : "none",
+					display: flightListTwo.firstWayTrips?.length === 0 ? "block" : "none",
 				}}
 			>
 				<p>
@@ -30,7 +30,15 @@ const AvailableFlightsListTripTwo = ({
 				</p>
 				<a href="/book-flight-start">Back to search</a>
 			</div>
-			<section>
+			<div
+				className="titleListpage"
+				style={{
+					display: flightListTwo.firstWayTrips?.length === 0 ? "none" : "block",
+				}}
+			>
+				<p>Book one of these flights:</p>
+			</div>
+			<section className="cardsList">
 				{flightListTwo.secondWayTrips?.map((flight) => {
 					return (
 						<OneFlightCard
@@ -46,7 +54,7 @@ const AvailableFlightsListTripTwo = ({
 					);
 				})}
 			</section>
-		</>
+		</section>
 	);
 };
 

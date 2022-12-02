@@ -1,0 +1,22 @@
+.confirmationSection {
+	border: 2px var(--background-hover) solid;
+	padding: 1rem;
+	max-width: 30rem;
+}
+
+.confirmationPage {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	height: 85vh;
+}
+
+.confirmationPage--button {
+	background-color: var(--background);
+	color: var(--text-primary);
+}
+
+.confirmationPage--button:hover {
+	background-color: var(--background-hover);
+	color: var(--text-primary-hover);
+}

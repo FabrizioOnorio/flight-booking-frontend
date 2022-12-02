@@ -1,0 +1,6 @@
+.errorInputMessage {
+  background-color: var(--card-background);
+  padding: 1rem;
+  margin: 1rem 2rem;
+  border: 2px var(--card-background--hover) solid;
+}

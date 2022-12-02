@@ -133,31 +133,28 @@ const BookingForm = ({
 			<SameCityErrorMessage sameCity={sameCity} />
 			<RouteNotAvailable routeNotAvailable={routeNotAvailable} />
 			<form onSubmit={handleSubmit} className="bookingForm">
-				<div className="formLine">
-					<label>From</label>
-					<select onChange={(e) => setFromCity(e.target.value)}>
-						<option value={"Oslo"}>Oslo</option>
-						<option value={"Stockholm"}>Stockholm</option>
-						<option value={"Amsterdam"}>Amsterdam</option>
-					</select>
-				</div>
-				<div className="formLine">
-					<label>To</label>
-					<select onChange={(e) => setToCity(e.target.value)}>
-						<option value={"Stockholm"}>Stockholm</option>
-						<option value={"Oslo"}>Oslo</option>
-						<option value={"Amsterdam"}>Amsterdam</option>
-					</select>
-				</div>
-				<div className="formLine">
+				<label>From</label>
+				<select onChange={(e) => setFromCity(e.target.value)}>
+					<option value={"Oslo"}>Oslo</option>
+					<option value={"Stockholm"}>Stockholm</option>
+					<option value={"Amsterdam"}>Amsterdam</option>
+				</select>
+
+				<label>To</label>
+				<select onChange={(e) => setToCity(e.target.value)}>
+					<option value={"Stockholm"}>Stockholm</option>
+					<option value={"Oslo"}>Oslo</option>
+					<option value={"Amsterdam"}>Amsterdam</option>
+				</select>
+				<div className="formLines">
 					<label>One way</label>
 					<input type="checkbox" checked={oneWay} onChange={handleChange} />
 				</div>
-				<div className="formLine">
+				<div className="formLines">
 					<label>Round Trip</label>
 					<input type="checkbox" checked={roundtrip} onChange={handleChange} />
 				</div>
-				<div className="formLine">
+				<div className="formLines">
 					<label>Adults: </label>
 					<input
 						type="number"
@@ -167,7 +164,7 @@ const BookingForm = ({
 						onChange={(e) => setAdults(e.target.value)}
 					/>
 				</div>
-				<div className="formLine">
+				<div className="formLines">
 					<label>Children: </label>
 					<input
 						type="number"

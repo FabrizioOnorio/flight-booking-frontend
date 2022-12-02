@@ -5,3 +5,23 @@
 .cardExtentionHidden {
   display: none;
 }
+
+.flightCard {
+  border: 2px var(--background-hover) solid;
+  max-width: 25rem;
+  padding: 1rem;
+}
+
+.flightCard:hover {
+  background-color: var(--card-background);
+}
+
+.card-button {
+  font-weight: bold;
+}
+
+.card-button:hover {
+  font-weight: bold;
+  background-color: var(--background-hover);
+  color: var(--text-primary-hover);
+}

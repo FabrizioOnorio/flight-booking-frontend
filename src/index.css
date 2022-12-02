@@ -3,6 +3,9 @@
 @import "./styles/checkInfosPage.css";
 @import "./styles/homepage.css";
 @import "./styles/startingFormPage.css";
+@import "./styles/loadingPage.css";
+@import "./styles/confirmationPage.css";
+@import "./styles/errors.css";
 @import url("https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&family=Zen+Dots&display=swap");
 @import url("https://fonts.googleapis.com/css2?family=Share+Tech+Mono&family=Space+Mono:wght@400;700&family=Zen+Dots&display=swap");
 
@@ -24,6 +27,8 @@ code {
 	--text-primary-hover: white;
 	--text-secondary: royalblue;
 	--accent: purple;
+  --card-background: #e9edc9;
+  --card-background--hover: #283618;
 }
 [data-theme="dark"] {
 	--background: black;
@@ -32,6 +37,8 @@ code {
 	--text-primary-hover: black;
 	--text-secondary: grey;
 	--accent: darkred;
+  --card-background: #283618;
+  --card-background--hover: #e9edc9;
 }
 
 .homeLogo {
@@ -46,7 +53,6 @@ code {
 	font-size: large;
 	font-weight: bold;
 	padding: 20px;
-	height: calc(100vh - 40px);
 	transition: all 0.5s;
 }
 

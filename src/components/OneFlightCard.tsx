@@ -114,7 +114,7 @@ const OneFlightCard = ({
 	};
 
 	return (
-		<div onClick={handleClick}>
+		<div onClick={handleClick} className="flightCard">
 			<p>Flight Date: {flightDate}</p>
 			<p>
 				From 
@@ -130,15 +130,17 @@ const OneFlightCard = ({
 					: flightListTwo?.fromCity}
 				, arrival time: {" " + arrivalTime}
 			</p>
-			<p>Duration: {" " + duration}</p>
+			<p>Duration: {" " + duration + " "}h</p>
 			<p>
-				Price for this flight:{" "}
+				Price (adults):{" "}
 				{flight.prices[0].adult + " " + flight.prices[0].currency + " "} per
 				person
 			</p>
 			<div className={clicked ? "cardExtentionVisible" : "cardExtentionHidden"}>
 				<p>
-					Price for Children: {" " + flight.prices[0].child + " "} per person
+					Price (Children):{" "}
+					{" " + flight.prices[0].child + " " + flight.prices[0].currency} per
+					person
 				</p>
 				<p>Availbale Seats: {" " + flight.avaliableSeats}</p>
 				<p
@@ -150,7 +152,7 @@ const OneFlightCard = ({
 								: "block",
 					}}
 				>
-					There are not enough seats available to book this flight
+					FLIGHT FULLY BOOKED, sorry :/
 				</p>
 				<button
 					onClick={handleBookingButton}
@@ -160,6 +162,14 @@ const OneFlightCard = ({
 							? false
 							: true
 					}
+					style={{
+						display:
+							Number(tripSearch?.adults) + Number(tripSearch?.children) <
+							flight.avaliableSeats
+								? "block"
+								: "none",
+					}}
+					className="card-button"
 				>
 					{booked ? "Flight Booked" : "Book This Flight"}
 				</button>

@@ -4,7 +4,10 @@ interface ISameCityErrorMessageProps {
 
 const SameCityErrorMessage = ({ sameCity }: ISameCityErrorMessageProps) => {
 	return (
-		<div style={{ display: sameCity ? "block" : "none" }}>
+		<div
+			className="errorInputMessage"
+			style={{ display: sameCity ? "block" : "none" }}
+		>
 			<p>Departure and Destination can't be the same</p>
 		</div>
 	);

@@ -5,3 +5,17 @@
 .listVisible {
   display: block;
 }
+
+.cardsList {
+  display: flex;
+  gap: 1rem;
+  flex-wrap: wrap;
+  margin: 2rem auto;
+  max-width: fit-content;
+
+  justify-content: center;
+}
+
+.titleListpage {
+  text-align: center;
+}
