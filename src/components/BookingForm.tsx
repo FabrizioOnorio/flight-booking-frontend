@@ -115,6 +115,7 @@ const BookingForm = ({
 				<input
 					type="number"
 					min="1"
+					max="10"
 					value={adults}
 					onChange={(e) => setAdults(e.target.value)}
 				/>
@@ -122,6 +123,7 @@ const BookingForm = ({
 				<input
 					type="number"
 					min="0"
+					max="10"
 					value={children}
 					onChange={(e) => setChildren(e.target.value)}
 				/>
@@ -129,12 +131,14 @@ const BookingForm = ({
 					<DatePicker
 						selected={fromDate}
 						onChange={(date: Date) => setFromDate(date)}
+						minDate={new Date()}
 					/>
 				</div>
 				<div style={{ display: roundtrip ? "" : "none" }}>
 					<DatePicker
 						selected={toDate}
 						onChange={(date: Date) => setToDate(date)}
+						minDate={fromDate}
 					/>
 				</div>
 				<button type="submit">Search and book</button>

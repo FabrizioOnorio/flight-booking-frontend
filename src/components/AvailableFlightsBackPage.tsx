@@ -1,6 +1,5 @@
 import { IbookingInfos, IFlightListResults, ITripSearch } from "../interface";
 import AvailableFlightsListTripTwo from "./AvailableFlightsListTripTwo";
-import BookingsBar from "./BookingsBar";
 
 interface IAvailableFlightsBackPageProps {
 	setBookedFlights: React.Dispatch<React.SetStateAction<IbookingInfos[]>>;
@@ -16,17 +15,14 @@ const AvailableFlightsBackPage = ({
 	tripSearch,
 }: IAvailableFlightsBackPageProps) => {
 	return (
-		<>
-			<BookingsBar bookedFlights={bookedFlights} />
-			<div>
-				<AvailableFlightsListTripTwo
-					flightListTwo={flightListTwo}
-					setBookedFlights={setBookedFlights}
-					tripSearch={tripSearch}
-					bookedFlights={bookedFlights}
-				/>
-			</div>
-		</>
+		<div>
+			<AvailableFlightsListTripTwo
+				flightListTwo={flightListTwo}
+				setBookedFlights={setBookedFlights}
+				tripSearch={tripSearch}
+				bookedFlights={bookedFlights}
+			/>
+		</div>
 	);
 };
 

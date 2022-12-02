@@ -29,6 +29,9 @@ const CheckInfosPage = ({
 			})
 			.catch((error) => console.log(error.message));
 	};
+  const finalPrice =
+		Number(bookedFlights[0]?.price) +
+		(bookedFlights[1] ? Number(bookedFlights[1]?.price) : 0);
 	return (
 		<>
 			<div className={booked ? "confirmationVisible" : "confirmationHidden"}>
@@ -66,12 +69,7 @@ const CheckInfosPage = ({
 				Duration: {" " + bookedFlights[1].duration}
 				Price: {bookedFlights[1].price}
 			</p>
-			<p>
-				Total Price{" "}
-				{" " +
-					Number(bookedFlights[0]?.price) +
-					(bookedFlights[1] ? Number(bookedFlights[1]?.price) : 0)}
-			</p>
+			<p>Total Price {" " + finalPrice}</p>
 			<p>Passengers Details:</p>
 			<div>
 				{passengersList.map((passenger) => {

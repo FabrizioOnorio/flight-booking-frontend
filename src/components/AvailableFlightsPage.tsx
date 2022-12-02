@@ -1,7 +1,6 @@
 import AvailableFlightsListTripOne from "./AvailableFlightsListTripOne";
 import LoadingPage from "./LoadingPage";
 import { IbookingInfos, IFlightListResults, ITripSearch } from "../interface";
-import BookingsBar from "./BookingsBar";
 
 interface IAvailableFlightsPageProps {
 	flightListOne: IFlightListResults;
@@ -20,17 +19,14 @@ const AvailableFlightsPage = ({
 }: IAvailableFlightsPageProps) => {
 	if (loading) return <LoadingPage />;
 	return (
-		<>
-			<BookingsBar bookedFlights={bookedFlights} />
-			<div>
-				<AvailableFlightsListTripOne
-					flightListOne={flightListOne}
-					setBookedFlights={setBookedFlights}
-					tripSearch={tripSearch}
-					bookedFlights={bookedFlights}
-				/>
-			</div>
-		</>
+		<div>
+			<AvailableFlightsListTripOne
+				flightListOne={flightListOne}
+				setBookedFlights={setBookedFlights}
+				tripSearch={tripSearch}
+				bookedFlights={bookedFlights}
+			/>
+		</div>
 	);
 };
 

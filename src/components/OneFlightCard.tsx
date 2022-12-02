@@ -23,10 +23,8 @@ const OneFlightCard = ({
 	flightListOne,
 	flightListTwo,
 	setOneFlightBooked,
-	oneFlightBooked,
 	setBookedFlights,
 	tripSearch,
-	bookedFlights,
 }: IOneFlightcard) => {
 	const navigate = useNavigate();
 	const [clicked, setClicked] = useState(false);
@@ -134,7 +132,26 @@ const OneFlightCard = ({
 					Price for Children: {" " + flight.prices[0].child + " "} per person
 				</p>
 				<p>Availbale Seats: {" " + flight.avaliableSeats}</p>
-				<button onClick={handleBookingButton}>
+				<p
+					style={{
+						display:
+							Number(tripSearch?.adults) + Number(tripSearch?.children) <
+							flight.avaliableSeats
+								? "none"
+								: "block",
+					}}
+				>
+					There are not enough seats available to book this flight
+				</p>
+				<button
+					onClick={handleBookingButton}
+					disabled={
+						Number(tripSearch?.adults) + Number(tripSearch?.children) <
+						flight.avaliableSeats
+							? false
+							: true
+					}
+				>
 					{booked ? "Flight Booked" : "Book This Flight"}
 				</button>
 			</div>
