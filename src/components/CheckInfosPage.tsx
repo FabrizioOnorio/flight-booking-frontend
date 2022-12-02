@@ -46,8 +46,8 @@ const CheckInfosPage = ({
 				<div>
 					<p>
 						Date:{" "}
-						{`${bookedFlights[0].completeDate.split("T")[0].split("-")[2]}/${
-							bookedFlights[0].completeDate.split("T")[0].split("-")[1]
+						{`${bookedFlights[0].completeDate?.split("T")[0].split("-")[2]}/${
+							bookedFlights[0].completeDate?.split("T")[0].split("-")[1]
 						}`}
 						<br></br>
 						From{" "}
@@ -70,8 +70,8 @@ const CheckInfosPage = ({
 				<div style={{ display: !bookedFlights[1] ? "none" : "block" }}>
 					<p>
 						Date:{" "}
-						{`${bookedFlights[1].completeDate.split("T")[0].split("-")[2]}/${
-							bookedFlights[1].completeDate.split("T")[0].split("-")[1]
+						{`${bookedFlights[1]?.completeDate.split("T")[0].split("-")[2]}/${
+							bookedFlights[1]?.completeDate.split("T")[0].split("-")[1]
 						}`}
 						<br></br>
 						From{" "}
