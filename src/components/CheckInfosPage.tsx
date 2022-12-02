@@ -29,7 +29,7 @@ const CheckInfosPage = ({
 			})
 			.catch((error) => console.log(error.message));
 	};
-  const finalPrice =
+	const finalPrice =
 		Number(bookedFlights[0]?.price) +
 		(bookedFlights[1] ? Number(bookedFlights[1]?.price) : 0);
 	return (
@@ -39,36 +39,46 @@ const CheckInfosPage = ({
 			</div>
 			<h2>Here are your booking details: </h2>
 			<p>Your booked Flights:</p>
-			<p>
-				Date: {bookedFlights[0].completeDate}
-				From{" "}
-				{" " +
-					bookedFlights[0].departureCity +
-					" at " +
-					bookedFlights[0].departureTime}{" "}
-				to{" "}
-				{" " +
-					bookedFlights[0].arrivalCity +
-					" at " +
-					bookedFlights[0].arrivalTime}
-				Duration: {" " + bookedFlights[0].duration}
-				Price: {bookedFlights[0].price}
-			</p>
-			<p>
-				Date: {bookedFlights[1].completeDate}
-				From{" "}
-				{" " +
-					bookedFlights[1].departureCity +
-					" at " +
-					bookedFlights[1].departureTime}{" "}
-				to{" "}
-				{" " +
-					bookedFlights[1].arrivalCity +
-					" at " +
-					bookedFlights[1].arrivalTime}
-				Duration: {" " + bookedFlights[1].duration}
-				Price: {bookedFlights[1].price}
-			</p>
+			<div>
+				<p>
+					Date:{" "}
+					{`${bookedFlights[0].completeDate.split("T")[0].split("-")[2]}/${
+						bookedFlights[0].completeDate.split("T")[0].split("-")[1]
+					}`}
+					From{" "}
+					{" " +
+						bookedFlights[0].departureCity +
+						" at " +
+						bookedFlights[0].departureTime}{" "}
+					to{" "}
+					{" " +
+						bookedFlights[0].arrivalCity +
+						" at " +
+						bookedFlights[0].arrivalTime}
+					Duration: {" " + bookedFlights[0].duration}
+					Price: {bookedFlights[0].price}
+				</p>
+			</div>
+			<div style={{ display: !bookedFlights[1] ? "none" : "block" }}>
+				<p>
+					Date:{" "}
+					{`${bookedFlights[1].completeDate.split("T")[0].split("-")[2]}/${
+						bookedFlights[1].completeDate.split("T")[0].split("-")[1]
+					}`}
+					From{" "}
+					{" " +
+						bookedFlights[1]?.arrivalCity +
+						" at " +
+						bookedFlights[1]?.departureTime}{" "}
+					to{" "}
+					{" " +
+						bookedFlights[1]?.departureCity +
+						" at " +
+						bookedFlights[1]?.arrivalTime}
+					Duration: {" " + bookedFlights[1]?.duration}
+					Price: {bookedFlights[1]?.price}
+				</p>
+			</div>
 			<p>Total Price {" " + finalPrice}</p>
 			<p>Passengers Details:</p>
 			<div>
@@ -76,7 +86,7 @@ const CheckInfosPage = ({
 					return (
 						<Passenger
 							passenger={passenger}
-							key={passenger.firstName + passenger.lasttName}
+							key={passenger.firstName + passenger.lastName}
 						/>
 					);
 				})}

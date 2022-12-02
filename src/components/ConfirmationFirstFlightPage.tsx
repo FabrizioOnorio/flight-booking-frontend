@@ -20,7 +20,6 @@ const ConfirmationFirstFlightPage = ({
 			navigate("/available-flights-back");
 		}
 	};
-	console.log(bookedFlights.length);
 	return (
 		<div>
 			<h3>Your flight Id: {flightListOne.trip1Id}</h3>

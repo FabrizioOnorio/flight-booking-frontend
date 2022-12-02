@@ -9,14 +9,13 @@ const PassengerInformations = ({
 	setPassengersList,
 }: PassengerInformationsProps) => {
 	const [firstName, setFirstName] = useState("");
-	const [lasttName, setLastName] = useState("");
+	const [lastName, setLastName] = useState("");
 	const [infoSaved, setInfoSaved] = useState(false);
 
-
 	const handleClick = () => {
-		const passenger = { firstName, lasttName };
+		const passenger = { firstName, lastName };
 		setPassengersList((prev) => [...prev, passenger]);
-    setInfoSaved(true);
+		setInfoSaved(true);
 	};
 	return (
 		<>
@@ -29,7 +28,7 @@ const PassengerInformations = ({
 			<input
 				type="text"
 				placeholder="Last Name"
-				value={lasttName}
+				value={lastName}
 				onChange={(e) => setLastName(e.target.value)}
 			/>
 			<button onClick={handleClick} disabled={infoSaved}>

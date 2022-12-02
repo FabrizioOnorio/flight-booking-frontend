@@ -16,11 +16,11 @@ const RegistrationPage = ({
 }: IRegistrationPageProps) => {
   const navigate = useNavigate();
 	const [firstName, setFirstName] = useState("");
-	const [lasttName, setLastName] = useState("");
+	const [lastName, setLastName] = useState("");
 	const [email, setEmail] = useState("");
 	const [infoSaved, setInfoSaved] = useState(false);
 	const handleClick = () => {
-		const passenger = { firstName, lasttName, email };
+		const passenger = { firstName, lastName, email };
 		setPassengersList((prev) => [...prev, passenger]);
 		setInfoSaved(true);
 	};
@@ -44,7 +44,7 @@ const RegistrationPage = ({
 				<input
 					type="text"
 					placeholder="Last Name"
-					value={lasttName}
+					value={lastName}
 					onChange={(e) => setLastName(e.target.value)}
 				/>
 				<input

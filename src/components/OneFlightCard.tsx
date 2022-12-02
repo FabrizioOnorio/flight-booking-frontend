@@ -25,6 +25,7 @@ const OneFlightCard = ({
 	setOneFlightBooked,
 	setBookedFlights,
 	tripSearch,
+	bookedFlights,
 }: IOneFlightcard) => {
 	const navigate = useNavigate();
 	const [clicked, setClicked] = useState(false);
@@ -75,7 +76,6 @@ const OneFlightCard = ({
 	const duration = diff(departureTime, arrivalTime);
 
 	const handleClick = () => setClicked(!clicked);
-
 	const handleBookingButton = (e: React.SyntheticEvent) => {
 		e.stopPropagation();
 		setBooked(true);
@@ -100,8 +100,17 @@ const OneFlightCard = ({
 			adultsBooked: Number(tripSearch?.adults),
 			childrenBooked: Number(tripSearch?.children),
 		};
+
 		setBookedFlights((prev) => [...prev, bookingInfos]);
-		navigate(`/confirmation1/${departureTime + "-" + flightListOne?.trip1Id}`);
+
+		navigate(
+			`/confirmation1/${
+				departureTime + "-" + flightListOne !== undefined &&
+				flightListTwo === undefined
+					? flightListOne?.trip1Id
+					: flightListTwo?.trip2Id
+			}`
+		);
 	};
 
 	return (
@@ -109,16 +118,16 @@ const OneFlightCard = ({
 			<p>Flight Date: {flightDate}</p>
 			<p>
 				From 
-				{" " + flightListOne !== undefined
+				{" " + flightListOne !== undefined && flightListTwo === undefined
 					? flightListOne?.fromCity
-					: flightListTwo?.fromCity}
+					: flightListTwo?.toCity}
 				, departure time: {" " + departureTime}
 			</p>
 			<p>
 				To 
-				{" " + flightListOne !== undefined
+				{" " + flightListOne !== undefined && flightListTwo === undefined
 					? flightListOne?.toCity
-					: flightListTwo?.toCity}
+					: flightListTwo?.fromCity}
 				, arrival time: {" " + arrivalTime}
 			</p>
 			<p>Duration: {" " + duration}</p>

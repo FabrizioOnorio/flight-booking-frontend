@@ -16,8 +16,20 @@ const AvailableFlightsListTripTwo = ({
 	bookedFlights,
 }: IAvailableFlightsListTripTwoProps) => {
 	const [oneFlightBooked, setOneFlightBooked] = useState(false);
-  if (flightListTwo.secondWayTrips?.length === 0) return <p>no flights found for the { ' ' + tripSearch?.toDate}, sorry</p>;
-		return (
+	if (flightListTwo.secondWayTrips?.length === 0)
+		return <p>no flights found for the {" " + tripSearch?.toDate}, sorry</p>;
+	return (
+		<>
+			<div
+				style={{
+					display: flightListTwo.firstWayTrips.length === 0 ? "block" : "none",
+				}}
+			>
+				<p>
+					No flights found for he selected dates, please try with other dates.
+				</p>
+				<a href="/book-flight-start">Back to search</a>
+			</div>
 			<section>
 				{flightListTwo.secondWayTrips?.map((flight) => {
 					return (
@@ -34,7 +46,8 @@ const AvailableFlightsListTripTwo = ({
 					);
 				})}
 			</section>
-		);
+		</>
+	);
 };
 
 export default AvailableFlightsListTripTwo;

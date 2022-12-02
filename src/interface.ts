@@ -5,7 +5,8 @@ export interface Iprices {
 }
 
 export interface IFlightListResults {
-	trip1Id: string;
+	trip1Id?: string;
+	trip2Id?: string;
 	firstWayTrips: IOneFlight[];
 	secondWayTrips?: IOneFlight[];
 	fromCity: string;
@@ -28,8 +29,8 @@ export interface IbookingInfos {
 	departureTime: string;
 	arrivalTime: string;
 	completeDate: string;
-  adultsBooked: number;
-  childrenBooked: number;
+	adultsBooked: number;
+	childrenBooked: number;
 }
 
 export interface ITripSearch {
@@ -45,6 +46,6 @@ export interface ITripSearch {
 
 export interface IPassenger {
 	firstName: string;
-	lasttName: string;
+	lastName: string;
 	email?: string;
 }

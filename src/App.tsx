@@ -14,6 +14,7 @@ import AvailableFlightsBackPage from "./components/AvailableFlightsBackPage";
 import RegistrationPage from "./components/RegistrationPage";
 import CheckInfosPage from "./components/CheckInfosPage";
 import useLocalStorage from "use-local-storage";
+import { BsFillSunFill, BsMoonStarsFill } from "react-icons/bs";
 
 function App() {
 	const defaultDark = window.matchMedia("(prefers-color-scheme: dark)").matches;
@@ -34,7 +35,16 @@ function App() {
 		toCity: "",
 	});
 	const [bookedFlights, setBookedFlights] = useState<IbookingInfos[]>([]);
-	const [tripSearch, setTripSearch] = useState<ITripSearch>();
+	const [tripSearch, setTripSearch] = useState<ITripSearch>({
+		fromCity: "",
+		toCity: "",
+		oneWay: false,
+		roundtrip: true,
+		fromDate: new Date(),
+		toDate: new Date(),
+		adults: "",
+		children: "",
+	});
 	const [passengersList, setPassengersList] = useState<IPassenger[]>([]);
 	const [loading, setLoading] = useState(false);
 
@@ -45,9 +55,14 @@ function App() {
 
 	return (
 		<div className="App" data-theme={theme}>
-			<button onClick={switchTheme}>
-				{theme === "light" ? "Dark" : "Light"}
-			</button>
+			<div className="nav">
+				<a href="/" className="homeLogo">
+					<h2>FLIGHT-MATCHER</h2>
+				</a>
+				<p onClick={switchTheme}>
+					{theme === "light" ? <BsMoonStarsFill /> : <BsFillSunFill />}
+				</p>
+			</div>
 			<BrowserRouter>
 				<Routes>
 					<Route path="/" element={<HomePage />} />

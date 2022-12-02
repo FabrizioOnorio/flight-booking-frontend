@@ -1,0 +1,11 @@
+.homePageSection {
+  min-height: 89vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.homePageSection button {
+  margin-top: 1rem;
+}
