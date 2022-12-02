@@ -13,8 +13,14 @@ import ConfirmationFirstFlightPage from "./components/ConfirmationFirstFlightPag
 import AvailableFlightsBackPage from "./components/AvailableFlightsBackPage";
 import RegistrationPage from "./components/RegistrationPage";
 import CheckInfosPage from "./components/CheckInfosPage";
+import useLocalStorage from "use-local-storage";
 
 function App() {
+	const defaultDark = window.matchMedia("(prefers-color-scheme: dark)").matches;
+	const [theme, setTheme] = useLocalStorage(
+		"theme",
+		defaultDark ? "dark" : "light"
+	);
 	const [flightListOne, setFlightListOne] = useState<IFlightListResults>({
 		trip1Id: "",
 		firstWayTrips: [],
@@ -32,8 +38,16 @@ function App() {
 	const [passengersList, setPassengersList] = useState<IPassenger[]>([]);
 	const [loading, setLoading] = useState(false);
 
+	const switchTheme = () => {
+		const newTheme = theme === "light" ? "dark" : "light";
+		setTheme(newTheme);
+	};
+
 	return (
-		<>
+		<div className="App" data-theme={theme}>
+			<button onClick={switchTheme}>
+				{theme === "light" ? "Dark" : "Light"}
+			</button>
 			<BrowserRouter>
 				<Routes>
 					<Route path="/" element={<HomePage />} />
@@ -104,7 +118,7 @@ function App() {
 					/>
 				</Routes>
 			</BrowserRouter>
-		</>
+		</div>
 	);
 }
 
