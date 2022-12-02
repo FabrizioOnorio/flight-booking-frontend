@@ -3,7 +3,9 @@ import { IbookingInfos, IPassenger } from "../interface";
 import Passenger from "./Passenger";
 
 const address =
-	process.env.NODE_ENV === "development" ? "http://localhost:5000" : "";
+	process.env.NODE_ENV === "development"
+		? "http://localhost:5000"
+		: "https://flight-booking-backend-production.up.railway.app";
 
 interface ICheckInfosPageProps {
 	bookedFlights: IbookingInfos[];
