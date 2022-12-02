@@ -31,7 +31,11 @@ const PassengerInformations = ({
 				value={lastName}
 				onChange={(e) => setLastName(e.target.value)}
 			/>
-			<button onClick={handleClick} disabled={infoSaved}>
+			<button
+				onClick={handleClick}
+				disabled={infoSaved}
+				style={{ display: infoSaved ? "none" : "block" }}
+			>
 				Add Passenger
 			</button>
 		</>

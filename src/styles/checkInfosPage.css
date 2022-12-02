@@ -1,7 +1,36 @@
 .confirmationVisible {
-  display: block;
+	display: block;
+  background-color: var(--card-background);
+  padding: 1rem;
+  margin: 1rem 2rem;
+  border: 2px var(--card-background--hover) solid;
+
 }
 
 .confirmationHidden {
-  display: none;
+	display: none;
+}
+
+.checkInfosPageTitle {
+	text-align: center;
+}
+
+.checkInfosCard {
+	border: 2px var(--text-primary) solid;
+	color: var(--text-primary);
+	background-color: var(--background);
+	padding: 2rem;
+	margin: 0 auto;
+
+  max-width: 30rem;
+}
+
+.checkInfosCard button {
+  color: var(--text-primary);
+  background-color: var(--background);
+}
+
+.checkInfosCard button:hover {
+  color: var(--text-primary-hover);
+  background-color: var(--background-hover);
 }

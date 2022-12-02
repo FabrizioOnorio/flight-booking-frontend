@@ -1,0 +1,35 @@
+.registrationTitle {
+  text-align: center;
+}
+
+.firstPassengerInfosForm {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  max-width: 30rem;
+  margin: 0 auto;
+}
+
+.firstPassengerInfosForm {
+  border-radius: 0;
+  padding: 1rem;
+}
+
+.firstPassengerInfosForm button {
+  color: var(--text-primary);
+  border-radius: var(--background);
+  text-align: center;
+}
+
+.firstPassengerInfosForm button:hover {
+  color: var(--text-primary-hover);
+  border-radius: var(--background-hover);
+}
+
+.nextRegistrationButton {
+  text-align: center;
+}
+
+.nextRegistrationPassenger {
+  text-align: center;
+}

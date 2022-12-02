@@ -5,6 +5,7 @@
 @import "./styles/startingFormPage.css";
 @import "./styles/loadingPage.css";
 @import "./styles/confirmationPage.css";
+@import "./styles/registrationPage.css";
 @import "./styles/errors.css";
 @import url("https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&family=Zen+Dots&display=swap");
 @import url("https://fonts.googleapis.com/css2?family=Share+Tech+Mono&family=Space+Mono:wght@400;700&family=Zen+Dots&display=swap");

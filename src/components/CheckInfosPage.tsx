@@ -35,68 +35,79 @@ const CheckInfosPage = ({
 		Number(bookedFlights[0]?.price) +
 		(bookedFlights[1] ? Number(bookedFlights[1]?.price) : 0);
 	return (
-		<>
+		<section className="checkInfosPage">
 			<div className={booked ? "confirmationVisible" : "confirmationHidden"}>
 				<p>Your booking is confirmes, thank you for booking with us!</p>
 			</div>
-			<h2>Here are your booking details: </h2>
-			<p>Your booked Flights:</p>
-			<div>
-				<p>
-					Date:{" "}
-					{`${bookedFlights[0].completeDate.split("T")[0].split("-")[2]}/${
-						bookedFlights[0].completeDate.split("T")[0].split("-")[1]
-					}`}
-					From{" "}
-					{" " +
-						bookedFlights[0].departureCity +
-						" at " +
-						bookedFlights[0].departureTime}{" "}
-					to{" "}
-					{" " +
-						bookedFlights[0].arrivalCity +
-						" at " +
-						bookedFlights[0].arrivalTime}
-					Duration: {" " + bookedFlights[0].duration}
-					Price: {bookedFlights[0].price}
-				</p>
+			<div className="checkInfosPageTitle">
+				<h2>Here are your booking details: </h2>
 			</div>
-			<div style={{ display: !bookedFlights[1] ? "none" : "block" }}>
-				<p>
-					Date:{" "}
-					{`${bookedFlights[1].completeDate.split("T")[0].split("-")[2]}/${
-						bookedFlights[1].completeDate.split("T")[0].split("-")[1]
-					}`}
-					From{" "}
-					{" " +
-						bookedFlights[1]?.arrivalCity +
-						" at " +
-						bookedFlights[1]?.departureTime}{" "}
-					to{" "}
-					{" " +
-						bookedFlights[1]?.departureCity +
-						" at " +
-						bookedFlights[1]?.arrivalTime}
-					Duration: {" " + bookedFlights[1]?.duration}
-					Price: {bookedFlights[1]?.price}
-				</p>
+			<div className="checkInfosCard">
+				<div>
+					<p>
+						Date:{" "}
+						{`${bookedFlights[0].completeDate.split("T")[0].split("-")[2]}/${
+							bookedFlights[0].completeDate.split("T")[0].split("-")[1]
+						}`}
+						<br></br>
+						From{" "}
+						{" " +
+							bookedFlights[0].departureCity +
+							" at " +
+							bookedFlights[0].departureTime}{" "}
+						<br></br>
+						to{" "}
+						{" " +
+							bookedFlights[0].arrivalCity +
+							" at " +
+							bookedFlights[0].arrivalTime}
+						<br></br>
+						Duration: {" " + bookedFlights[0].duration}
+						<br></br>
+						Price: {" " + bookedFlights[0].price + " SEK"}
+					</p>
+				</div>
+				<div style={{ display: !bookedFlights[1] ? "none" : "block" }}>
+					<p>
+						Date:{" "}
+						{`${bookedFlights[1].completeDate.split("T")[0].split("-")[2]}/${
+							bookedFlights[1].completeDate.split("T")[0].split("-")[1]
+						}`}
+						<br></br>
+						From{" "}
+						{" " +
+							bookedFlights[1]?.arrivalCity +
+							" at " +
+							bookedFlights[1]?.departureTime}{" "}
+						<br></br>
+						to{" "}
+						{" " +
+							bookedFlights[1]?.departureCity +
+							" at " +
+							bookedFlights[1]?.arrivalTime}
+						<br></br>
+						Duration: {" " + bookedFlights[1]?.duration}
+						<br></br>
+						Price: {" " + bookedFlights[1]?.price + " SEK"}
+					</p>
+				</div>
+				<p>Total Price {" " + finalPrice + " SEK"}</p>
+				<p>Passengers Details:</p>
+				<div>
+					{passengersList.map((passenger) => {
+						return (
+							<Passenger
+								passenger={passenger}
+								key={passenger.firstName + passenger.lastName}
+							/>
+						);
+					})}
+				</div>
+				<button onClick={handleClick} disabled={booked}>
+					Confirm!
+				</button>
 			</div>
-			<p>Total Price {" " + finalPrice}</p>
-			<p>Passengers Details:</p>
-			<div>
-				{passengersList.map((passenger) => {
-					return (
-						<Passenger
-							passenger={passenger}
-							key={passenger.firstName + passenger.lastName}
-						/>
-					);
-				})}
-			</div>
-			<button onClick={handleClick} disabled={booked}>
-				Confirm!
-			</button>
-		</>
+		</section>
 	);
 };
 

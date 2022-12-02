@@ -1,20 +1,21 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { IPassenger, ITripSearch } from "../interface";
+import Passenger from "./Passenger";
 import PassengerInformations from "./PassengerInformations";
 
 interface IRegistrationPageProps {
 	setPassengersList: React.Dispatch<React.SetStateAction<IPassenger[]>>;
 	tripSearch: ITripSearch | undefined;
-  passengersList: IPassenger[];
+	passengersList: IPassenger[];
 }
 
 const RegistrationPage = ({
 	setPassengersList,
 	tripSearch,
-  passengersList,
+	passengersList,
 }: IRegistrationPageProps) => {
-  const navigate = useNavigate();
+	const navigate = useNavigate();
 	const [firstName, setFirstName] = useState("");
 	const [lastName, setLastName] = useState("");
 	const [email, setEmail] = useState("");
@@ -24,17 +25,20 @@ const RegistrationPage = ({
 		setPassengersList((prev) => [...prev, passenger]);
 		setInfoSaved(true);
 	};
-  const numberOfExtraPassengers =
-		Array(Number(tripSearch?.adults) + Number(tripSearch?.children) - 1).fill('passenger');
-  const handleChekoutButton = () => {
-    if (numberOfExtraPassengers.length + 1 === passengersList.length) {
-      navigate('/checkInfos')
-    }
-  }
+	const numberOfExtraPassengers = Array(
+		Number(tripSearch?.adults) + Number(tripSearch?.children) - 1
+	).fill("passenger");
+	const handleChekoutButton = () => {
+		if (numberOfExtraPassengers.length + 1 === passengersList.length) {
+			navigate("/checkInfos");
+		}
+	};
 	return (
-		<>
-			<h1>Passenger Informations:</h1>
-			<div>
+		<section className="registrationPage">
+			<div className="registrationTitle">
+				<h1>Passenger Informations:</h1>
+			</div>
+			<div className="firstPassengerInfosForm">
 				<input
 					type="text"
 					placeholder="First Name"
@@ -53,7 +57,11 @@ const RegistrationPage = ({
 					value={email}
 					onChange={(e) => setEmail(e.target.value)}
 				/>
-				<button onClick={handleClick} disabled={infoSaved}>
+				<button
+					onClick={handleClick}
+					style={{ display: infoSaved ? "none" : "block" }}
+					disabled={infoSaved}
+				>
 					Add Passenger
 				</button>
 				{numberOfExtraPassengers.map((_passenger, index) => {
@@ -65,13 +73,27 @@ const RegistrationPage = ({
 					);
 				})}
 			</div>
-			<button
-				onClick={handleChekoutButton}
-				disabled={numberOfExtraPassengers.length + 1 !== passengersList.length}
-			>
-				Next
-			</button>
-		</>
+			<div className="nextRegistrationButton">
+				<button
+					onClick={handleChekoutButton}
+					disabled={
+						numberOfExtraPassengers.length + 1 !== passengersList.length
+					}
+				>
+					Next
+				</button>
+			</div>
+			<div className="nextRegistrationPassenger">
+				{passengersList?.map((passenger) => {
+					return (
+						<Passenger
+							passenger={passenger}
+							key={passenger.firstName + passenger.lastName}
+						/>
+					);
+				})}
+			</div>
+		</section>
 	);
 };
 
